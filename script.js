@@ -1,32 +1,48 @@
+// Button Filtering Start
 
-// Login Page 
-document.getElementById("signinBtn").addEventListener("click", (event) => {
-    event.preventDefault();
-    const userName = document.getElementById("username")
-    const userNameValue = userName.value
+const AllFilterBtn = document.getElementById("all-filter-btn");
+const OpenFilterBtn = document.getElementById("open-filter-btn");
+const ClosedFilterBtn = document.getElementById("closed-filter-btn");
 
-    const password = document.getElementById("password")
-    const passwordValue = password.value
+// Button Filtering End
 
-    if(userNameValue == "admin" && passwordValue == "admin123"){
-        window.location.assign("./home.html")
-    }
-    else if(userNameValue == "" && passwordValue == ""){
-        // alert("Enter Username and Password")
-        userName.placeholder = "*Username is required";
-        password.placeholder = "*Password is required";
-        userName.style.borderColor = "red";
-        password.style.borderColor = "red";
-    }
-    else{
-        const Alert = `
-        <div role="alert" class="alert alert-error">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>Invalid Username or Password</span>
-        </div>`
-        document.getElementById("alertContainer").innerHTML = Alert;
-    }
-})
-// Login Page End
+// Issue Card Dynamic Start
+async function getData() {
+  const response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+  const data = await response.json();
+
+  
+  const issues = data.data || [];
+
+  console.log(data);
+  console.log(issues.length);
+
+    // Dynamic Total Issue Counter Start
+    const TotalIssue = document.getElementById("TotalIssue");
+    TotalIssue.innerHTML = `<h2 class="font-bold text-2xl">${issues.length} Issues</h2><p>Track and manage your project issues</p>`
+    // Dynamic Total Issue Counter End
+
+    // Dynamic Issue Cards Start
+
+    const issueCard = document.getElementById("issueCard");
+    const issueCards = issues.map(issue => {
+        return `
+        <div class="border border-gray-300 rounded-md p-4 mb-4">
+            <h3 class="text-lg font-semibold mb-2">${issue.title}</h3>
+            <p class="text-gray-600 mb-2">${issue.description}</p>
+            <p class="text-sm text-gray-500">Status: ${issue.status}</p>
+        </div>
+        `;
+    }).join("");
+
+    issueCard.innerHTML = issueCards;
+
+    // Dynamic Issue Cards End
+
+
+}
+
+getData();
+
+
+// Issue Card Dynamic End
