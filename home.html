@@ -56,9 +56,9 @@
     <section class="container mx-auto px-6 py-8">
         <!-- Filter Section -->
         <div class="max-w-[90%] bg-white rounded-md shadow mx-auto px-6 py-4 flex items-center gap-4">
-            <button onclick="toggleStyle('all-filter-btn')" id="all-filter-btn" class="btn btn-active btn-primary">All</button>
-            <button onclick="toggleStyle('open-filter-btn')" id="open-filter-btn" class="btn bg-[#FFFFFF] border-[#E4E4E7] text-[#64748B]">Open</button>
-            <button onclick="toggleStyle('closed-filter-btn')" id="closed-filter-btn" class="btn bg-[#FFFFFF] border-[#E4E4E7] text-[#64748B]">Closed</button>
+            <button onclick="toggleStyle('all-filter-btn')" id="all-filter-btn" class="btn filter-btn bg-[#FFFFFF] border-[#E4E4E7] text-[#64748B]">All</button>
+            <button onclick="toggleStyle('open-filter-btn')" id="open-filter-btn" class="btn filter-btn bg-[#FFFFFF] border-[#E4E4E7] text-[#64748B]">Open</button>
+            <button onclick="toggleStyle('closed-filter-btn')" id="closed-filter-btn" class="btn filter-btn bg-[#FFFFFF] border-[#E4E4E7] text-[#64748B]">Closed</button>
         </div>
 
         <!-- Issues Counter -->
@@ -89,24 +89,21 @@
                 <div id="issueCard" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 </div>
-
-                <!-- <div class="IssueCard shadow rounded-md p-4 bg-white border-t-4 border-green-700">
-                    <div class="TopIcon flex justify-between items-center mb-3">
-                        <img src="./assets/Open-Status.png" alt="">
-                        <p class="bg-red-200 rounded-full py-1 px-7 text-red-500 font-semibold">HIGH</p>
-                    </div>
-                    <h2 class="font-bold text-2xl mb-2">Issue Title</h2>
-                    <p class="text-[#64748B] mb-3">Issue Description</p>
-                    <div class="batch mb-4">
-                        <div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning font-bold">Warning</div>
-                        <div class="badge badge-outline rounded-full bg-[#FEECEC] badge-error font-bold">Error</div>
-                    </div>
-                    <hr class=" border border-gray-200 mb-4">
-                    <p class="text-[#64748B] mb-2">Author: John Doe</p>
-                    <p class="text-[#64748B]">Date: 2023-10-01</p>
-                </div> -->
                 
             </div>
+
+            <!-- Dynamic Modal -->
+            <dialog id="issue_modal" class="modal">
+            <div class="modal-box">
+                <div id="modalContent"></div>
+
+                <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Close</button>
+                </form>
+                </div>
+            </div>
+            </dialog>
         </div>
     </section>    
         
