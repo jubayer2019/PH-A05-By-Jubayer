@@ -9,9 +9,22 @@ const loadWordDetail = async(id) => {
         displayModal(data);
 };
 
+// Manage Spinner
+const manageSpinner = (status)=>{
+    if(status==true){
+        document.getElementById("loadingSpinner").classList.remove("hidden");
+        document.getElementById("cardContainer ").classList.add("hidden");
+    }else{
+        document.getElementById("cardContainer ").classList.remove("hidden");
+        document.getElementById("loadingSpinner").classList.add("hidden");
+    }
+};
+
+
 const displayModal = (data) => {
     // console.log(data);
     const issue_modal = document.getElementById("modal_container");
+    // manageSpinner(true);
     issue_modal.innerHTML = `
     <h2 class="font-bold text-[24px]">${data.data.title}</h2>
     <div class="flex items-center gap-4 py-4">
@@ -38,13 +51,17 @@ const displayModal = (data) => {
     </div>
 
     `;
+    // manageSpinner(false);
     document.getElementById("text_modal").showModal();
+    
 };
+
 
 // Issue Card Dynamic Start
 async function getData() {
   const response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
   const data = await response.json();
+//   manageSpinner(true);
 
 //   Counting Open and Closed Issues Start
   const issues = data.data || [];
@@ -189,7 +206,7 @@ setActiveButton(AllFilterBtn);
         // Dynamic Issue Cards End
     });
 
-    
+    // manageSpinner(false);
     
 }
 
