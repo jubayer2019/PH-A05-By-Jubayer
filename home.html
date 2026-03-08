@@ -55,14 +55,14 @@
     <!-- Main Content -->
     <section class="container mx-auto px-6 py-8">
         <!-- Filter Section -->
-        <div class="max-w-[80%] bg-white rounded-md shadow mx-auto px-6 py-4 flex items-center gap-4">
+        <div class="max-w-[90%] bg-white rounded-md shadow mx-auto px-6 py-4 flex items-center gap-4">
             <button onclick="toggleStyle('all-filter-btn')" id="all-filter-btn" class="btn btn-active btn-primary">All</button>
             <button onclick="toggleStyle('open-filter-btn')" id="open-filter-btn" class="btn bg-[#FFFFFF] border-[#E4E4E7] text-[#64748B]">Open</button>
             <button onclick="toggleStyle('closed-filter-btn')" id="closed-filter-btn" class="btn bg-[#FFFFFF] border-[#E4E4E7] text-[#64748B]">Closed</button>
         </div>
 
         <!-- Issues Counter -->
-        <div class="max-w-[80%] bg-white rounded-md shadow mx-auto px-6 py-4 flex justify-between items-center mt-6">
+        <div class="max-w-[90%] bg-white rounded-md shadow mx-auto px-6 py-4 flex justify-between items-center mt-6">
             <div class="flex justify-center items-center gap-2">
                 <div class="bg-purple-300 h-[50%] rounded-full p-2"><img src="./assets/Aperture.png" alt=""></div>
                 <div id="TotalIssue">
@@ -82,15 +82,15 @@
             </div>
         </div>
         <!-- Issues List -->
-        <div class="max-w-[80%] bg-white rounded-md shadow mx-auto px-6 py-4 mt-6">
+        <div class="max-w-[90%] bg-white rounded-md shadow mx-auto px-6 py-4 mt-6">
             
             <!-- Dynamic Issue Cards -->
-            <div class="cardContainer grid grid-cols-4 gap-4">
-                <div id="issueCard">
+            <div class="cardContainer ">
+                <div id="issueCard" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 </div>
 
-                <div class="IssueCard shadow rounded-md p-4 bg-white border-t-4 border-green-700">
+                <!-- <div class="IssueCard shadow rounded-md p-4 bg-white border-t-4 border-green-700">
                     <div class="TopIcon flex justify-between items-center mb-3">
                         <img src="./assets/Open-Status.png" alt="">
                         <p class="bg-red-200 rounded-full py-1 px-7 text-red-500 font-semibold">HIGH</p>
@@ -104,7 +104,7 @@
                     <hr class=" border border-gray-200 mb-4">
                     <p class="text-[#64748B] mb-2">Author: John Doe</p>
                     <p class="text-[#64748B]">Date: 2023-10-01</p>
-                </div>
+                </div> -->
                 
             </div>
         </div>
