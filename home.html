@@ -93,17 +93,19 @@
             </div>
 
             <!-- Dynamic Modal -->
-            <dialog id="issue_modal" class="modal">
+            <dialog id="text_modal" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box">
-                <div id="modalContent"></div>
-
+                <div id="modal_container">
+                </div>
                 <div class="modal-action">
                 <form method="dialog">
-                    <button class="btn">Close</button>
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn btn-primary">Close</button>
                 </form>
                 </div>
             </div>
             </dialog>
+
         </div>
     </section>    
         

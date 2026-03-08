@@ -1,11 +1,52 @@
 
+// Modal Dynamic Start
+const loadWordDetail = async(id) => {
+        const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+        console.log(url);
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        displayModal(data);
+};
+
+const displayModal = (data) => {
+    // console.log(data);
+    const issue_modal = document.getElementById("modal_container");
+    issue_modal.innerHTML = `
+    <h2 class="font-bold text-[24px]">${data.data.title}</h2>
+    <div class="flex items-center gap-4 py-4">
+    ${data.data.status === "open" ? '<div class="badge badge-success rounded-full">Openned</div>' : '<div class="badge badge-primary rounded-full">Closed</div>'}
+    <span>•</span><p class="text-[#64748B] text-[12px]">Open by ${data.data.author}</p>
+    <span>•</span><p class="text-[#64748B] text-[12px]">${new Date(data.data.createdAt).toLocaleDateString()}</p>
+    </div>
+    <div class="batch flex items-center gap-1 mb-2 uppercase">
+        <div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">${data.data.labels[0]}</div>
+        <div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">${data.data.labels[1]}</div>
+    </div>
+    <p class="text-[#64748B] py-5 text-[12px]">${data.data.description}</p>
+
+    <div class="bg-[#F8FAFC] rounded-md p-3 flex justify-baseline items-center gap-[35%]">
+        <div>
+            <p class="text-[#64748B] text-[12px] mb-2">Assignee:</p>
+            <h2 class="font-semibold text-[16px]">${data.data.assignee}</h2>
+        </div>
+        <div>
+            <p class="text-[#64748B] text-[12px] mb-2">Priority:</p>
+            ${data.data.priority === "high" ? '<p class="bg-red-200 rounded-full py-1 px-7 text-red-500 font-semibold">HIGH</p>' : data.data.priority === "medium" ? '<p class="bg-yellow-200 rounded-full py-1 px-7 text-[#D97706] font-semibold">MEDIUM</p>' : '<p class="bg-[#EEEFF2] rounded-full py-1 px-7 text-[#9CA3AF] font-semibold">LOW</p>'}
+
+        </div>
+    </div>
+
+    `;
+    document.getElementById("text_modal").showModal();
+};
 
 // Issue Card Dynamic Start
 async function getData() {
   const response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
   const data = await response.json();
 
-  
+//   Counting Open and Closed Issues Start
   const issues = data.data || [];
   const openCount = issues.filter(issue => issue.status === "open").length;
   const closedCount = issues.filter(issue => issue.status === "closed").length;
@@ -99,9 +140,12 @@ renderIssues(issues);
 setActiveButton(AllFilterBtn);
 
 
+
+
 // Dynamic Issue Cards Start
 
     function renderIssues(issueList) {
+
     const container = document.getElementById("issueCard");
     container.innerHTML = "";
 
@@ -109,7 +153,7 @@ setActiveButton(AllFilterBtn);
         const card = `
         <div>
         
-        <div class=" shadow rounded-t-md p-4 bg-white border-t-4 ${issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}">
+        <div onclick="loadWordDetail(${issue.id})" class=" shadow rounded-t-md p-4 bg-white border-t-4 ${issue.status === "open" ? "border-[#00A96E]" : "border-[#A855F7]"}">
                     <div class="TopIcon flex justify-between items-center mb-3">
                         ${issue.status === "open" ? '<img src="./assets/Open-Status.png" alt="">' : '<img src="./assets/Closed- Status .png" alt="">'}
                         ${issue.priority === "high" ? '<p class="bg-red-200 rounded-full py-1 px-7 text-red-500 font-semibold">HIGH</p>' : issue.priority === "medium" ? '<p class="bg-yellow-200 rounded-full py-1 px-7 text-[#D97706] font-semibold">MEDIUM</p>' : '<p class="bg-[#EEEFF2] rounded-full py-1 px-7 text-[#9CA3AF] font-semibold">LOW</p>'}
@@ -158,27 +202,21 @@ getData();
 
 // Issue Card Dynamic End
 
-async function modalData() {
-  const response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}");
-  const data = await response.json();
+// async function modalData() {
+//   const response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}");
+//   const data = await response.json();
 
   
-  const mData = data.data || [];
-  const issue_modal = document.getElementById("issue_modal");
-    const modalDetails = mData.map(issue => {
-        return `
-        <div>
-            <h2 class="text-2xl font-bold mb-4">${issue.title}</h2>
-            <p class="text-gray-700 mb-4">${issue.description}</p>
-            <p class="text-sm text-gray-500">#${issue.id} by ${issue.author}</p>
-            <p class="text-sm text-gray-500">Assignee: ${issue.assignee}</p>
-            <p class="text-sm text-gray-500">Created: ${new Date(issue.createdAt).toLocaleDateString()}</p>
-            <p class="text-sm text-gray-500">Updated: ${new Date(issue.updatedAt).toLocaleDateString()}</p>
-        </div>
-        `;
-    }).join("");
-    issue_modal.innerHTML = modalDetails;
-}
+//   const mData = data.data || [];
+//   const issue_modal = document.getElementById("my_modal_5");
+//     const modalDetails = mData.map(issue => {
+//         return `
+//         <h3 class="text-lg font-bold">${issue.title}</h3>
+//         `;
+//     }).join("");
+//     console.log(mData);
+//     issue_modal.innerHTML = modalDetails;
+// }
 
-modalData();
+// modalData();
 // Modal Dynamic Start
