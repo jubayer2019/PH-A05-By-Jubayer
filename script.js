@@ -13,9 +13,9 @@ const loadWordDetail = async(id) => {
 const manageSpinner = (status)=>{
     if(status==true){
         document.getElementById("loadingSpinner").classList.remove("hidden");
-        document.getElementById("cardContainer ").classList.add("hidden");
+        document.getElementById("cardContainer").classList.add("hidden");
     }else{
-        document.getElementById("cardContainer ").classList.remove("hidden");
+        document.getElementById("cardContainer").classList.remove("hidden");
         document.getElementById("loadingSpinner").classList.add("hidden");
     }
 };
@@ -33,8 +33,9 @@ const displayModal = (data) => {
     <span>•</span><p class="text-[#64748B] text-[12px]">${new Date(data.data.createdAt).toLocaleDateString()}</p>
     </div>
     <div class="batch flex items-center gap-1 mb-2 uppercase">
-        <div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">${data.data.labels[0]}</div>
-        <div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">${data.data.labels[1]}</div>
+        ${data.data.labels[0] === "bug" ? '<div class="badge badge-outline rounded-full bg-red-50 badge-error text-[10px] font-bold">bug</div> ': data.data.labels[0] === "help wanted" ? '<div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">help wanted</div>' : data.data.labels[0] === "enhancement" ? '<div class="badge badge-outline rounded-full bg-green-50 badge-success text-[10px] font-bold">enhancement</div>': data.data.labels[0] === "documentation" ? '<div class="badge border rounded-full bg-slate-50 border-slate-500 text-[10px] font-bold">documentation</div>': data.data.labels[0] === "good first issue" ? '<div class="badge badge-outline rounded-full bg-purple-50 badge-primary text-[10px] font-bold">good first issue</div>':''}
+
+        ${data.data.labels[1] === "bug" ? '<div class="badge badge-outline rounded-full bg-red-50 badge-error text-[10px] font-bold">bug</div> ': data.data.labels[1] === "help wanted" ? '<div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">help wanted</div>' : data.data.labels[1] === "enhancement" ? '<div class="badge badge-outline rounded-full bg-green-50 badge-success text-[10px] font-bold">enhancement</div>': data.data.labels[1] === "documentation" ? '<div class="badge border rounded-full bg-slate-50 border-slate-500 text-[10px] font-bold">documentation</div>': data.data.labels[1] === "good first issue" ? '<div class="badge badge-outline rounded-full bg-purple-50 badge-primary text-[10px] font-bold">good first issue</div>':''}
     </div>
     <p class="text-[#64748B] py-5 text-[12px]">${data.data.description}</p>
 
@@ -51,7 +52,6 @@ const displayModal = (data) => {
     </div>
 
     `;
-    // manageSpinner(false);
     document.getElementById("text_modal").showModal();
     
 };
@@ -61,7 +61,6 @@ const displayModal = (data) => {
 async function getData() {
   const response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
   const data = await response.json();
-//   manageSpinner(true);
 
 //   Counting Open and Closed Issues Start
   const issues = data.data || [];
@@ -165,6 +164,7 @@ setActiveButton(AllFilterBtn);
 
     const container = document.getElementById("issueCard");
     container.innerHTML = "";
+    
 
     issueList.forEach(issue => {
         const card = `
@@ -182,8 +182,11 @@ setActiveButton(AllFilterBtn);
                     ? issue.description.slice(0,50) + "..." 
                     : issue.description}</p>
                     <div class="batch flex items-center gap-1 mb-2 uppercase">
-                        <div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">${issue.labels[0]}</div>
-                        <div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">${issue.labels[1]}</div>
+                    
+                    
+                        ${issue.labels[0] === "bug" ? '<div class="badge badge-outline rounded-full bg-red-50 badge-error text-[10px] font-bold">bug</div> ': issue.labels[0] === "help wanted" ? '<div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">help wanted</div>' : issue.labels[0] === "enhancement" ? '<div class="badge badge-outline rounded-full bg-green-50 badge-success text-[10px] font-bold">enhancement</div>': issue.labels[0] === "documentation" ? '<div class="badge border rounded-full bg-slate-50 border-slate-500 text-[10px] font-bold">documentation</div>': issue.labels[0] === "good first issue" ? '<div class="badge badge-outline rounded-full bg-purple-50 badge-primary text-[10px] font-bold">good first issue</div>':''}
+
+                        ${issue.labels[1] === "bug" ? '<div class="badge badge-outline rounded-full bg-red-50 badge-error text-[10px] font-bold">bug</div> ': issue.labels[1] === "help wanted" ? '<div class="badge badge-outline rounded-full bg-[#FFF8DB] badge-warning text-[10px] font-bold">help wanted</div>' : issue.labels[1] === "enhancement" ? '<div class="badge badge-outline rounded-full bg-green-50 badge-success text-[10px] font-bold">enhancement</div>': issue.labels[1] === "documentation" ? '<div class="badge border rounded-full bg-slate-50 border-slate-500 text-[10px] font-bold">documentation</div>': issue.labels[1] === "good first issue" ? '<div class="badge badge-outline rounded-full bg-purple-50 badge-primary text-[10px] font-bold">good first issue</div>':''}
                         
                     </div>
                     
@@ -205,11 +208,8 @@ setActiveButton(AllFilterBtn);
         container.innerHTML += card;
         // Dynamic Issue Cards End
     });
-
-    // manageSpinner(false);
     
 }
-
 
 }
 
