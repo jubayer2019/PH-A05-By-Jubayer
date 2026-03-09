@@ -75,7 +75,6 @@ searchInput.addEventListener("input", function () {
 
 const displayModal = (data) => {
     // console.log(data);
-    manageSpinner(true);
     const issue_modal = document.getElementById("modal_container");
     
     issue_modal.innerHTML = `
