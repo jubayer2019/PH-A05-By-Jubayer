@@ -24,7 +24,7 @@ const manageSpinner = (status)=>{
 const displayModal = (data) => {
     // console.log(data);
     const issue_modal = document.getElementById("modal_container");
-    // manageSpinner(true);
+    
     issue_modal.innerHTML = `
     <h2 class="font-bold text-[24px]">${data.data.title}</h2>
     <div class="flex items-center gap-4 py-4">
@@ -216,24 +216,3 @@ setActiveButton(AllFilterBtn);
 getData();
 
 
-
-// Issue Card Dynamic End
-
-// async function modalData() {
-//   const response = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}");
-//   const data = await response.json();
-
-  
-//   const mData = data.data || [];
-//   const issue_modal = document.getElementById("my_modal_5");
-//     const modalDetails = mData.map(issue => {
-//         return `
-//         <h3 class="text-lg font-bold">${issue.title}</h3>
-//         `;
-//     }).join("");
-//     console.log(mData);
-//     issue_modal.innerHTML = modalDetails;
-// }
-
-// modalData();
-// Modal Dynamic Start
